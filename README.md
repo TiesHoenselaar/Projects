@@ -1,3 +1,3 @@
 # Overview of the Projects
 
-* [Sudoku Solver](/sudokuSolver/sudokuSolver.html)
+* [Sudoku Solver](https://tieshoenselaar.github.io/Projects/sudokuSolver)
