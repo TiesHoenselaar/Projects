@@ -14,7 +14,6 @@ function Cell(x, y, w) {
 	this.w = w;
 	this.selected = false;
 	this.value = 0;
-	this.tempValues = [];
 }
 
 Cell.prototype.show = function() {
@@ -27,23 +26,29 @@ Cell.prototype.show = function() {
 	fill(0);
 	
 	// textAlign(CENTER);
-	if (this.value != 0 && this.tempValues.length == 0){
+	if (this.value != 0){
 		textSize(32);
 		text(this.value, this.x + this.w / 3, this.y + this.w / 1.4)
 	}
 
-	if (this.tempValues.length != 0) {
-		for (var i = 0; i < this.tempValues.length; i++) {
-			textSize(12);
-			number = this.tempValues[i]
-			var x_offset = (number-1)%3-1;
-			var y_offset = Math.floor((number-1)/3)-1;
-			text(number, this.x + this.w / 2.3 + 0.3 * this.w * x_offset, this.y + this.w / 1.7 + 0.3 * this.w * y_offset)		
-		}
-	}
 	// }
 }
 
 Cell.prototype.contains = function(x, y) {
 	return (x > this.x && y > this.y && x < this.x + this.w && y < this.y + this.w);
+}
+
+function drawLines() {
+	strokeWeight(5);
+	// horizontal
+	// console.log(grid.boxWidth);
+	for (var i = 0; i < (grid.cols/grid.boxHeight)+1; i++) {
+		line(offset, offset + grid.boxHeight*i*w, offset + grid.rows*w, offset + grid.boxHeight*i*w);
+	}
+
+	// vertical
+	for (var i = 0; i < (grid.rows/grid.boxWidth)+1; i++) {
+		line(offset + grid.boxWidth*i*w, offset, offset + grid.boxWidth*i*w, offset + grid.cols*w);
+	}
+	strokeWeight(1);
 }

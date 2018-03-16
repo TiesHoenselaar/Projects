@@ -1,38 +1,75 @@
 // Sudoku template
 
 var grid;
-var cols = 9;
-var rows = 9;
+// var cols = 9;
+// var rows = 9;
 var w = 50;
 var offset = 15;
-var pencilSelected = false;
 
 
 function setup() {
-  createCanvas(800, 800);
-	grid = make2DArray(cols, rows);
-	for (var i = 0; i < cols; i++) {
-		for (var j = 0; j < rows; j++) {
-			grid[i][j] = new Cell(offset + i * w, offset + j * w, w);
-		}
-	}
+  	createCanvas(1000, 1000);
+	
+	grid = createSudoku(9, 9);
 
 	resetButton = createButton('Reset');
-	resetButton.position(500,15);
+	resetButton.position(700,15);
 	resetButton.mousePressed(resetAllNumbers);
 
-	pencilButton = createButton('Pencil');
-	pencilButton.position(500,65);
-	pencilButton.mousePressed(pencilButtonClicked);
-
 	initializeButton = createButton('Initialize');
-	initializeButton.position(500,115);
+	initializeButton.position(700,115);
 	initializeButton.mousePressed(initialize);
 
 	solveButton = createButton('Solve');
-	solveButton.position(500,165);
+	solveButton.position(700,165);
 	solveButton.mousePressed(solveSudoku);
 
+	updateSizeButton = createButton('Update size');
+	updateSizeButton.position(700,215);
+	updateSizeButton.mousePressed(updateSize);
+
+	// updateSize();
+
+  	inputRows = createInput();
+  	inputRows.value('9');
+  	inputRows.position(700,285);
+
+  	inputCols = createInput();
+  	inputCols.value('9');
+  	inputCols.position(700,315);
+
+  	inputBoxWidth = createInput();
+  	inputBoxWidth.value('3');
+  	inputBoxWidth.position(700,345);
+
+  	inputBoxHeight = createInput();
+  	inputBoxHeight.value('3');
+  	inputBoxHeight.position(700,375);
+
+}
+
+function createSudoku(rows=3, cols=3, boxWidth=3, boxHeight=3) {
+	grid = make2DArray(rows, cols);
+	grid.rows = rows;
+	grid.cols = cols;
+	grid.boxWidth = boxWidth;
+	grid.boxHeight = boxHeight;
+	for (var i = 0; i < grid.rows; i++) {
+		for (var j = 0; j < grid.cols; j++) {
+			grid[i][j] = new Cell(offset + i * w, offset + j * w, w);
+		}
+	}
+	return grid;
+}
+
+function updateSize() {
+	// var columns = 12;
+
+	//cols rows
+	// console.log(int(inputCols.value()));
+	grid = createSudoku(int(inputCols.value()), int(inputRows.value()), int(inputBoxWidth.value()), int(inputBoxHeight.value()));
+	// console.log(grid.cols)
+	// console.log(grid2);
 }
 
 function initialize() {
@@ -71,40 +108,17 @@ function initialize() {
 }
 
 function resetAllNumbers() {
-	for (var i = 0; i < cols; i++) {
-		for (var j = 0; j < rows; j++) {
+	for (var i = 0; i < grid.rows; i++) {
+		for (var j = 0; j < grid.cols; j++) {
 			grid[i][j].value = 0;
-			grid[i][j].tempValues = [];
 			grid[i][j].selected = false;
 		}
 	}
 }
 
-function pencilButtonClicked() {
-	if (pencilSelected) {
-		pencilSelected = false;
-	} else {
-		pencilSelected = true;
-	}
-}
-
-function drawLines() {
-	strokeWeight(5);
-	// horizontal
-	for (var i = 0; i < 4; i++) {
-		line(offset, offset + 3*i*w, offset + 9*w, offset + 3*i*w);
-	}
-
-	// vertical
-	for (var i = 0; i < 4; i++) {
-		line(offset + 3*i*w, offset, offset + 3*i*w, offset + 9*w);
-	}
-	strokeWeight(1);
-}
-
 function mousePressed() {
-	for (var i = 0; i < cols; i++) {
-		for (var j = 0; j < rows; j++) {
+	for (var i = 0; i < grid.rows; i++) {
+		for (var j = 0; j < grid.cols; j++) {
 			if (grid[i][j].contains(mouseX, mouseY)) {
 				grid[i][j].selected = true;
 			} else {
@@ -116,11 +130,8 @@ function mousePressed() {
 
 function keyPressed() {
 	// console.log(keyCode);
-	// p
-	if (keyCode == 80) {
-		pencilButtonClicked();
 	// r
-	} else if (keyCode == 82) {
+	if (keyCode == 82) {
 		resetAllNumbers();
 	// i
 	} else if (keyCode == 73) {
@@ -128,41 +139,23 @@ function keyPressed() {
 	// s
 	} else if (keyCode == 83) {
 		solveSudoku();
+	// u
+	} else if (keyCode == 85) {
+		updateSize();
 	}
-	for (var i = 0; i < cols; i++) {
-		for (var j = 0; j < rows; j++) {
+	for (var i = 0; i < grid.rows; i++) {
+		for (var j = 0; j < grid.cols; j++) {
 			if (grid[i][j].selected) {
 				// console.log(grid[i][j])
 				if (keyCode >= 49 && keyCode < 58) {
 					var number = keyCode - 48;
-					if (!pencilSelected) {
-						grid[i][j].value = number
-						grid[i][j].tempValues = [];
-					} else {
-						var index = grid[i][j].tempValues.indexOf(number);
-						if (index == -1) {
-							grid[i][j].tempValues.push(number);
-						} else {
-							grid[i][j].tempValues.splice(index, 1);
-						}
-					}
+					grid[i][j].value = number
 				} else if (keyCode >= 97 && keyCode < 106) {
 					var number = keyCode - 96;
-					if (!pencilSelected) {
-						grid[i][j].value = number;
-						grid[i][j].tempValues = [];
-					}  else {
-						var index = grid[i][j].tempValues.indexOf(number);
-						if (index == -1) {
-							grid[i][j].tempValues.push(number);
-						} else {
-							grid[i][j].tempValues.splice(index, 1);
-						}
-					}
+					grid[i][j].value = number;
 				// backspace or delete
 				} else if (keyCode == 8 || keyCode == 46) {
 					grid[i][j].value = 0;
-					grid[i][j].tempValues = [];
 
 				// escape
 				} else if (keyCode == 27) {
@@ -182,13 +175,13 @@ function keyPressed() {
 					}
 				// right
 				} else if (keyCode == 39) {
-					if (i < 8) {
+					if (i < grid.rows-1) {
 						grid[i+1][j].selected = true;
 						grid[i][j].selected = false;
 					}
 				// down
 				} else if (keyCode == 40) {
-					if (j < 8) {
+					if (j < grid.cols-1) {
 						grid[i][j].selected = false;
 						grid[i][j+1].selected = true;
 					}
@@ -201,22 +194,15 @@ function keyPressed() {
 
 function draw() {
 	background(255);
-	for (var i = 0; i < cols; i++) {
-		for (var j = 0; j < rows; j++) {
+	for (var i = 0; i < grid.rows; i++) {
+		for (var j = 0; j < grid.cols; j++) {
 			grid[i][j].show();
 		}
 	}
 	drawLines();
 
 	textSize(16);
-	if (pencilSelected) {
-		text('On', 580, 80);
-	} else {
-		text('Off', 580, 80);
-	}
-
 	var instructions = "Press 1-9 to insert a number\nPress I to initialize \nPress R to reset \nPress S to solve \nPress P switch between pen/pencil \nUse the arrow keys to move around \n";
-	stroke(50);
-	text(instructions,500,250);
+	text(instructions,700,485);
 
 }
