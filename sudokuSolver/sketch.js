@@ -159,7 +159,7 @@ function mousePressed() {
 
 ///// CHECKED /////
 function keyPressed() {
-	// console.log(keyCode);
+	console.log(keyCode);
 	// r
 	if (keyCode == 82) {
 		resetAllNumbers();
@@ -194,7 +194,11 @@ function keyPressed() {
 				// backspace or delete
 				} else if (keyCode == 8 || keyCode == 46) {
 					sudoku[i][j].value = 0;
-
+				// zero
+				} else if (keyCode == 48 || keyCode == 96) {
+					if (sudoku[i][j].value == 1 && sudoku.boxRows*sudoku.boxCols >= 10) {
+						sudoku[i][j].value = 10;
+					}
 				// escape
 				} else if (keyCode == 27) {
 					sudoku[i][j].selected = false;
