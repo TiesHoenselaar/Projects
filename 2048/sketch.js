@@ -8,6 +8,22 @@ function setup() {
 	addNumber();
 	addNumber();
 
+	moveUpButton = createButton('Up');
+	moveUpButton.position(143,500);
+	moveUpButton.mousePressed(moveUp);
+
+	moveDownButton = createButton('Down');
+	moveDownButton.position(130,620);
+	moveDownButton.mousePressed(moveDown);
+
+	moveLeftButton = createButton('Left');
+	moveLeftButton.position(65,560);
+	moveLeftButton.mousePressed(moveLeft);
+
+	moveRightButton = createButton('Right');
+	moveRightButton.position(210,560);
+	moveRightButton.mousePressed(moveRight);
+
 }
 
 function createGrid() {
