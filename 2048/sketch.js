@@ -206,8 +206,8 @@ function moveUp() {
 		for (var row = 0; row < 4; row++) {
 			grid[row][col] = numbers2[row];
 		}
-
 	}
+	addNumber();
 }
 
 function moveDown() {
@@ -262,6 +262,7 @@ function moveDown() {
 		}
 
 	}
+	addNumber();
 }
 
 function moveLeft() {
@@ -311,12 +312,8 @@ function moveLeft() {
 		for (var col = 0; col < 4; col++) {
 			grid[row][col] = numbers2[col];
 		}
-
-
-
-
-
 	}
+	addNumber();
 }
 
 function moveRight() {
@@ -368,29 +365,29 @@ function moveRight() {
 		for (var col = 3; col >= 0; col--) {
 			grid[row][col] = numbers2[col];
 		}
-
 	}
+	addNumber();
 }
 
 function keyPressed() {
 	// console.log(keyCode);
 	if (keyCode == 38) {
 		moveUp();
-		addNumber();
+		// addNumber();
 	} else if (keyCode == 40) {
 		moveDown();
-		addNumber();
+		// addNumber();
 	} else if (keyCode == 37) {
 		moveLeft();
-		addNumber();
+		// addNumber();
 	} else if (keyCode == 39) {
 		moveRight();
-		addNumber();
+		// addNumber();
 	} else if (keyCode == 82) {
 		grid = createGrid();
-	} else if (keyCode == 65) {
+	}/* else if (keyCode == 65) {
 		addNumber();
-	}
+	}*/
 }
 
 function draw() {
