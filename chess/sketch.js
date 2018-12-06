@@ -15,34 +15,6 @@ function setup() {
   }
 
   board = new Board();
-
-  input = createInput();
-  input.position(0, 850);
-
-  button = createButton('move');
-  button.position(0, 900);
-  button.mousePressed(movePiece);
-}
-
-function movePiece() {
-  var move = input.value();
-  var color = move[0];
-  var piece = move[1];
-  var row = int(move[2])
-
-  if (color == 'w') {
-    if (piece == 'p') {
-      currentPiece = board.whitePieces[row + 7];
-      currentPiece.move(currentPiece.matrixPosition.x, currentPiece.matrixPosition.y - 1);
-    }
-
-  } else {
-    if (piece == 'p') {
-      currentPiece = board.blackPieces[row + 7];
-      currentPiece.move(currentPiece.matrixPosition.x, currentPiece.matrixPosition.y + 1);
-    }
-  }
-
 }
 
 function draw() {
