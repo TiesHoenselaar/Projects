@@ -15,45 +15,45 @@ class Piece {
 
     show() {
         // var show_images = 0
-        // if (show_images) {
-        //     imageMode(CENTER);
-        //     if (this.movingThisPiece) {
-        //         image(this.pic, mouseX, mouseY, tileSize * 1.5, tileSize * 1.5);
-
-        //     } else {
-        //         image(this.pic, this.pixelPosition.x, this.pixelPosition.y, tileSize, tileSize);
-        //     }
         if (!this.taken) {
-            textSize(40);
-            strokeWeight(5);
-            if (this.white) {
-                fill(255);
-                stroke(0);
-            } else {
-                fill(30);
-                stroke(255);
-            }
-            textAlign(CENTER, CENTER);
+            imageMode(CENTER);
             if (this.movingThisPiece) {
+                image(this.pic, mouseX, mouseY, tileSize * 1.5, tileSize * 1.5);
 
-                var movesPossible = this.possibleMoves(board);
-                fill(0, 0, 255, 127);
-                for (var i = 0; i < movesPossible.length; i++) {
-                    ellipse(movesPossible[i].x * tileSize + tileSize / 2, movesPossible[i].y * tileSize + tileSize / 2, tileSize, tileSize)
-                }
-
-
-                if (this.white) {
-                    fill(255);
-                    stroke(0);
-                } else {
-                    fill(30);
-                    stroke(255);
-                }
-                text(this.letter, mouseX, mouseY)
             } else {
-                text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
+                image(this.pic, this.pixelPosition.x, this.pixelPosition.y, tileSize, tileSize);
             }
+        // if (!this.taken) {
+        //     textSize(40);
+        //     strokeWeight(5);
+        //     if (this.white) {
+        //         fill(255);
+        //         stroke(0);
+        //     } else {
+        //         fill(30);
+        //         stroke(255);
+        //     }
+        //     textAlign(CENTER, CENTER);
+        //     if (this.movingThisPiece) {
+
+        //         var movesPossible = this.possibleMoves(board);
+        //         fill(0, 0, 255, 127);
+        //         for (var i = 0; i < movesPossible.length; i++) {
+        //             ellipse(movesPossible[i].x * tileSize + tileSize / 2, movesPossible[i].y * tileSize + tileSize / 2, tileSize, tileSize)
+        //         }
+
+
+        //         if (this.white) {
+        //             fill(255);
+        //             stroke(0);
+        //         } else {
+        //             fill(30);
+        //             stroke(255);
+        //         }
+        //         text(this.letter, mouseX, mouseY)
+        //     } else {
+        //         text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
+        //     }
         }
     }
 
@@ -124,9 +124,6 @@ class Piece {
         return false;
     }
 
-    // possibleMoves() {
-    //     return true;
-    // }
 }
 
 class King extends Piece {
@@ -175,9 +172,9 @@ class Queen extends Piece {
         this.letter = "Q";
         this.value = 9;
         if (isWhite) {
-            this.pic = images[0];
+            this.pic = images[2];
         } else {
-            this.pic = images[1];
+            this.pic = images[3];
         }
     }
 
@@ -260,9 +257,9 @@ class Rook extends Piece {
         this.letter = "R";
         this.value = 5;
         if (isWhite) {
-            this.pic = images[0];
+            this.pic = images[4];
         } else {
-            this.pic = images[1];
+            this.pic = images[5];
         }
     }
 
@@ -325,9 +322,9 @@ class Bishop extends Piece {
         this.letter = "B";
         this.value = 3;
         if (isWhite) {
-            this.pic = images[0];
+            this.pic = images[6];
         } else {
-            this.pic = images[1];
+            this.pic = images[7];
         }
     }
 
@@ -389,9 +386,9 @@ class Knight extends Piece {
         this.letter = "Kn";
         this.value = 3;
         if (isWhite) {
-            this.pic = images[0];
+            this.pic = images[8];
         } else {
-            this.pic = images[1];
+            this.pic = images[9];
         }
     }
 
@@ -450,9 +447,9 @@ class Pawn extends Piece {
         this.letter = "P";
         this.firstTurn = true;
         if (isWhite) {
-            this.pic = images[0];
+            this.pic = images[10];
         } else {
-            this.pic = images[1];
+            this.pic = images[11];
         }
         this.value = 1
     }

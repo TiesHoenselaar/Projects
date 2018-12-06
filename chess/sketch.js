@@ -9,10 +9,10 @@ var tileSize = 100;
 function setup() {
   createCanvas(800, 800);
 
-  // for (var i = 0; i < 6; i++) {
-  // images.push(loadImage("sprites/white_" + i + ".png"))
-  // images.push(loadImage("sprites/black_" + i + ".png"))
-  // }
+  for (var i = 0; i < 6; i++) {
+    images.push(loadImage("sprites/white_" + i + ".png"))
+    images.push(loadImage("sprites/black_" + i + ".png"))
+  }
 
   board = new Board();
 
