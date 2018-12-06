@@ -44,9 +44,16 @@ class Board{
 	}
 
 	show(){
+
+		if (whitesMove) {
+			text("White's turn", 920, 50);
+		} else {
+			text("Black's turn", 920, 50);
+		}
 		for (var i = 0; i < this.whitePieces.length; i++) {
 			this.whitePieces[i].show();
-        }
+		}
+		
         for (var i = 0; i < this.blackPieces.length; i++) {
 			this.blackPieces[i].show();
 		}
