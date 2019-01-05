@@ -14,10 +14,7 @@ class Piece {
 
 
     show() {
-<<<<<<< HEAD
-=======
         imageMode(CENTER);
->>>>>>> 74d59dae4f9e6c453f3bdc7d7b4ce3fdc3af0355
         if (!this.taken) {
             textSize(40);
             strokeWeight(5);
@@ -30,7 +27,6 @@ class Piece {
             }
             textAlign(CENTER, CENTER);
             if (this.movingThisPiece) {
-<<<<<<< HEAD
 
                 textSize(40);
                 strokeWeight(5);
@@ -51,8 +47,6 @@ class Piece {
                 }
 
                 image(this.pic, mouseX, mouseY, tileSize * 1.5, tileSize * 1.5);
-=======
->>>>>>> 74d59dae4f9e6c453f3bdc7d7b4ce3fdc3af0355
 
                 var movesPossible = this.possibleMoves(board);
                 fill(0, 0, 255, 127);
@@ -71,7 +65,6 @@ class Piece {
                 text(this.letter, mouseX, mouseY)
                 image(this.pic, mouseX, mouseY, tileSize * 1.5, tileSize * 1.5);
             } else {
-<<<<<<< HEAD
                 textSize(40);
                 strokeWeight(5);
                 if (this.white) {
@@ -84,9 +77,6 @@ class Piece {
                 textAlign(CENTER, CENTER);
                 text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
 
-=======
-                text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
->>>>>>> 74d59dae4f9e6c453f3bdc7d7b4ce3fdc3af0355
                 image(this.pic, this.pixelPosition.x, this.pixelPosition.y, tileSize, tileSize);
             }
         }
@@ -609,4 +599,3 @@ class Pawn extends Piece {
         this.firstTurn = false;
     }
 }
-
