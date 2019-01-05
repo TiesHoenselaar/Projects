@@ -14,9 +14,23 @@ class Piece {
 
 
     show() {
+<<<<<<< HEAD
+=======
+        imageMode(CENTER);
+>>>>>>> 74d59dae4f9e6c453f3bdc7d7b4ce3fdc3af0355
         if (!this.taken) {
-            imageMode(CENTER);
+            textSize(40);
+            strokeWeight(5);
+            if (this.white) {
+                fill(255);
+                stroke(0);
+            } else {
+                fill(30);
+                stroke(255);
+            }
+            textAlign(CENTER, CENTER);
             if (this.movingThisPiece) {
+<<<<<<< HEAD
 
                 textSize(40);
                 strokeWeight(5);
@@ -37,8 +51,27 @@ class Piece {
                 }
 
                 image(this.pic, mouseX, mouseY, tileSize * 1.5, tileSize * 1.5);
+=======
+>>>>>>> 74d59dae4f9e6c453f3bdc7d7b4ce3fdc3af0355
 
+                var movesPossible = this.possibleMoves(board);
+                fill(0, 0, 255, 127);
+                for (var i = 0; i < movesPossible.length; i++) {
+                    ellipse(movesPossible[i].x * tileSize + tileSize / 2, movesPossible[i].y * tileSize + tileSize / 2, tileSize, tileSize)
+                }
+
+
+                if (this.white) {
+                    fill(255);
+                    stroke(0);
+                } else {
+                    fill(30);
+                    stroke(255);
+                }
+                text(this.letter, mouseX, mouseY)
+                image(this.pic, mouseX, mouseY, tileSize * 1.5, tileSize * 1.5);
             } else {
+<<<<<<< HEAD
                 textSize(40);
                 strokeWeight(5);
                 if (this.white) {
@@ -51,39 +84,11 @@ class Piece {
                 textAlign(CENTER, CENTER);
                 text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
 
+=======
+                text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
+>>>>>>> 74d59dae4f9e6c453f3bdc7d7b4ce3fdc3af0355
                 image(this.pic, this.pixelPosition.x, this.pixelPosition.y, tileSize, tileSize);
             }
-        // if (!this.taken) {
-        //     textSize(40);
-        //     strokeWeight(5);
-        //     if (this.white) {
-        //         fill(255);
-        //         stroke(0);
-        //     } else {
-        //         fill(30);
-        //         stroke(255);
-        //     }
-        //     textAlign(CENTER, CENTER);
-        //     if (this.movingThisPiece) {
-
-        //         var movesPossible = this.possibleMoves(board);
-        //         fill(0, 0, 255, 127);
-        //         for (var i = 0; i < movesPossible.length; i++) {
-        //             ellipse(movesPossible[i].x * tileSize + tileSize / 2, movesPossible[i].y * tileSize + tileSize / 2, tileSize, tileSize)
-        //         }
-
-
-        //         if (this.white) {
-        //             fill(255);
-        //             stroke(0);
-        //         } else {
-        //             fill(30);
-        //             stroke(255);
-        //         }
-        //         text(this.letter, mouseX, mouseY)
-        //     } else {
-        //         text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
-        //     }
         }
     }
 
@@ -97,11 +102,9 @@ class Piece {
     }
 
     move(x, y, board) {
-        print('hi');
         var attackingPiece = board.getPieceAt(x, y);
         if (attackingPiece != null) {
             attackingPiece.taken = true;
-            console.log('ran')
         }
 
         this.matrixPosition = createVector(x, y);
@@ -170,6 +173,14 @@ class King extends Piece {
     }
 
     canMove(x, y) {
+        if (!this.withinBounds(x, y)) {
+            return false;
+        }
+
+        if (this.attackingAllies(x, y, board)) {
+            return false;
+        }
+
         if (abs(x - this.matrixPosition.x) <= 1 && abs(y - this.matrixPosition.y) <= 1) {
             return true;
         }
@@ -209,12 +220,28 @@ class Queen extends Piece {
     }
 
     canMove(x, y) {
-        if (x == this.matrixPosition.x || y == this.matrixPosition.y) {
-            return true
+        if (!this.withinBounds(x, y)) {
+            return false;
         }
 
+        if (this.attackingAllies(x, y, board)) {
+            return false;
+        }
+
+        // Horizontal or vertical
+        if (x == this.matrixPosition.x || y == this.matrixPosition.y) {
+            if (this.moveThroughPieces(x, y, board)) {
+                return false;
+            }
+            return true;
+        }
+
+        // Diagonal
         if (abs(x - this.matrixPosition.x) == abs(y - this.matrixPosition.y)) {
-            return true
+            if (this.moveThroughPieces(x, y, board)) {
+                return false;
+            }
+            return true;
         }
         return false;
     }

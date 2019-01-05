@@ -3,11 +3,12 @@ var moving = false;
 var currentPiece;
 
 var movingPiece;
+var whitesMove = true;
 var images = [];
 
 var tileSize = 100;
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(1100, 800);
 
   for (var i = 0; i < 6; i++) {
     images.push(loadImage("sprites/white_" + i + ".png"))
@@ -15,38 +16,10 @@ function setup() {
   }
 
   board = new Board();
-
-  input = createInput();
-  input.position(0, 850);
-
-  button = createButton('move');
-  button.position(0, 900);
-  button.mousePressed(movePiece);
-}
-
-function movePiece() {
-  var move = input.value();
-  var color = move[0];
-  var piece = move[1];
-  var row = int(move[2])
-
-  if (color == 'w') {
-    if (piece == 'p') {
-      currentPiece = board.whitePieces[row + 7];
-      currentPiece.move(currentPiece.matrixPosition.x, currentPiece.matrixPosition.y - 1);
-    }
-
-  } else {
-    if (piece == 'p') {
-      currentPiece = board.blackPieces[row + 7];
-      currentPiece.move(currentPiece.matrixPosition.x, currentPiece.matrixPosition.y + 1);
-    }
-  }
-
 }
 
 function draw() {
-  background(100);
+  background(255);
   showGrid();
   board.show();
 }
@@ -69,7 +42,7 @@ function mousePressed() {
   var y = floor(mouseY / tileSize);
   if (!moving) {
     movingPiece = board.getPieceAt(x, y);
-    if (movingPiece != null) {
+    if (movingPiece != null && movingPiece.white == whitesMove) {
       movingPiece.movingThisPiece = true;
     } else {
       return;
@@ -78,6 +51,7 @@ function mousePressed() {
     if (movingPiece.canMove(x, y, board)) {
       movingPiece.move(x, y, board);
       movingPiece.movingThisPiece = false;
+      whitesMove = !whitesMove
     } else {
       movingPiece.movingThisPiece = false;
     }
