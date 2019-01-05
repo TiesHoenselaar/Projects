@@ -14,13 +14,43 @@ class Piece {
 
 
     show() {
-        // var show_images = 0
         if (!this.taken) {
             imageMode(CENTER);
             if (this.movingThisPiece) {
+
+                textSize(40);
+                strokeWeight(5);
+                if (this.white) {
+                    fill(255);
+                    stroke(0);
+                } else {
+                    fill(30);
+                    stroke(255);
+                }
+                textAlign(CENTER, CENTER);
+                text(this.letter, mouseX, mouseY)
+
+                var movesPossible = this.possibleMoves(board);
+                fill(0, 0, 255, 127);
+                for (var i = 0; i < movesPossible.length; i++) {
+                    ellipse(movesPossible[i].x * tileSize + tileSize / 2, movesPossible[i].y * tileSize + tileSize / 2, tileSize, tileSize)
+                }
+
                 image(this.pic, mouseX, mouseY, tileSize * 1.5, tileSize * 1.5);
 
             } else {
+                textSize(40);
+                strokeWeight(5);
+                if (this.white) {
+                    fill(255);
+                    stroke(0);
+                } else {
+                    fill(30);
+                    stroke(255);
+                }
+                textAlign(CENTER, CENTER);
+                text(this.letter, this.pixelPosition.x, this.pixelPosition.y)
+
                 image(this.pic, this.pixelPosition.x, this.pixelPosition.y, tileSize, tileSize);
             }
         // if (!this.taken) {
