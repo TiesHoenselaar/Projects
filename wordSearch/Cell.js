@@ -11,6 +11,7 @@ class Cell {
   show() {
     // Square
     fill(255);
+    strokeWeight(2)
     rect(this.x * gridSize, this.y * gridSize, gridSize, gridSize);
 
     // Circle if clicked
