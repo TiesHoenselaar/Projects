@@ -3,9 +3,10 @@ var yellow_dice_checkbox;
 var purple_dice_checkbox;
 var roll_dice_button;
 
+var total = 1;
 
 function setup() {
-  createCanvas(450, 250);
+  createCanvas(450, 270);
   background(220);
   textSize(20);
   red_dice_checkbox = createCheckbox('Red dice', true);
@@ -32,16 +33,22 @@ function setup() {
 }
 
 function draw() {
+  show_dice();
 }
 
+function show_dice() {
 
+  if (total) {
+    text("Total: " + total, 10, 250);
+  }
+}
 function roll_dice() {
 
   var rolls = [1,2,3,4,5,6];
   var red_number = 0;
   var yellow_number = 0;
   var purple_number = 0;
-  var total = 0
+  total = 0;
 
   if (red_dice_checkbox.checked()) {
     red_number = random(rolls);
@@ -65,5 +72,7 @@ function roll_dice() {
   image(yellow_dice_images[yellow_number], 160, 100);
   image(purple_dice_images[purple_number], 310, 100);
   // text("Total: " + total, 10, 250);
+
+  // show_dice()
 
 }
