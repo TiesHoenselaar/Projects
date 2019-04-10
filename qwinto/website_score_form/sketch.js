@@ -1,7 +1,10 @@
 var tileSize = 50;
 var slider;
 var button;
-var buttons = new Array(2);
+var buttons = new Array(3);
+var inputFormShown = false;
+var cellClickedI;
+var cellClickedJ;
 
 function setup() {
   createCanvas(650, 200);
@@ -22,17 +25,19 @@ function setup() {
   slider.class('slider');
   slider.id('myRange');
 
-  button = createButton("5");
-  button.position(100, 100);
+  button = createButton("Show input form");
+  button.position(20, 200);
   button.mousePressed(buttonClicked);
 
   buttons[0] = new inputButton(0, 0, "1");
   buttons[1] = new inputButton(1, 0, "2");
+  buttons[2] = new inputButton(2, 0, "3");
 }
 
 function buttonClicked() {
   console.log("Button clicked!");
-  button.position(100, 400);
+  showInputButtons();
+
 }
 
 function mySelectEvent() {
@@ -43,13 +48,31 @@ function mySelectEvent() {
 function draw() {
   scoreform.show();
 
-  buttons[0].display();
-  buttons[1].display();
+  // rect(100, 100, 500, 200);
+  for (var i = 0; i < buttons.length; i++) {
+      buttons[i].display();
+  }
+
 }
 
 function mousePressed() {
   // When the mouse is pressed, we must check every single button
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].click(mouseX, mouseY);
+
+  if (inputFormShown) {
+      for (var i = 0; i < buttons.length; i++) {
+          buttons[i].click(mouseX, mouseY);
+      }
+  } else {
+      for (var i = 0; i < 12; i++) {
+          for (var j = 0; j < 3; j++) {
+              scoreform.scores[i][j].click(mouseX, mouseY);
+          }
+      }
   }
+
+  background(220);
+
+
+
+
 }

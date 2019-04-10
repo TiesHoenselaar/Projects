@@ -1,13 +1,12 @@
-class ScoreForm{
+function ScoreForm() {
 
-  constructor() {
     var colors = ['red', 'yellow', 'purple'];
 
-    this.scores = []
+    this.scores = [];
 
-    for (let i = 0; i < 12; i++) {
+    for (var i = 0; i < 12; i++) {
       var row = [];
-      for (let j = 0; j < 3; j++) {
+      for (var j = 0; j < 3; j++) {
         row.push(new Cell(i, j, colors[j]));
       }
       this.scores.push(row);
@@ -62,16 +61,13 @@ class ScoreForm{
     this.scores[8][2].value = 11;
     this.scores[9][2].value = 0;
 
-
-  }
-
-  show() {
-    for (let i = 0; i < 12; i++) {
-      for (let j = 0; j < 3; j++) {
-        this.scores[i][j].show()
-      }
-    }
-  }
+    this.show = function() {
+        for (var i = 0; i < 12; i++) {
+            for (var j = 0; j < 3; j++) {
+                this.scores[i][j].show();
+            }
+        }
+    };
 
 
 }
