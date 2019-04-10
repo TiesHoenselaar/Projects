@@ -14,24 +14,34 @@ function inputButton(x, y, value) {
 
     this.value = value;
     this.show = false;
+    this.hidden = false;
 
     this.click = function(mx, my) {
       // Check to see if a point is inside the rectangle
       if (inputFormShown && mx > this.pixelPosition.x && mx < this.pixelPosition.x + size && my > this.pixelPosition.y && my < this.pixelPosition.y + size) {
           // console.log("Clicked on input button", this.value);
-          scoreform.scores[cellClickedI][cellClickedJ].value = this.value;
+          console.log(this.x, this.y, this.hidden);
+          if (!this.hidden) {
+              console.log(!this.hidden);
+            scoreform.scores[cellClickedI][cellClickedJ].value = this.value;
+            }
+
+          // console.log("inputFormShown set to",inputFormShown);
           hideInputButtons();
           inputFormShown = false;
-          // console.log("inputFormShown set to",inputFormShown);
       }
-    }
+  };
 
     this.display = function() {
       rectMode(CORNER);
       stroke(0);
 
       if (this.show) {
-          fill(100);
+          if (this.hidden) {
+              fill(220);
+          } else {
+              fill(50);
+          }
           rect(this.pixelPosition.x, this.pixelPosition.y, size, size);
           fill(200);
           text(this.value, this.pixelPosition.x + size/2, this.pixelPosition.y + size/2)

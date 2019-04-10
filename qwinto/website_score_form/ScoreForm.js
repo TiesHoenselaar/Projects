@@ -51,15 +51,15 @@ function ScoreForm() {
     this.scores[10][1].value = 16;
 
     // Bottom row
-    this.scores[0][2].value = 2;
-    this.scores[1][2].value = 4;
-    this.scores[2][2].value = 0;
-    this.scores[3][2].value = 6;
-    this.scores[5][2].value = 7;
-    this.scores[6][2].value = 0;
-    this.scores[7][2].value = 9;
-    this.scores[8][2].value = 11;
-    this.scores[9][2].value = 0;
+    // this.scores[0][2].value = 2;
+    // this.scores[1][2].value = 4;
+    // this.scores[2][2].value = 0;
+    // this.scores[3][2].value = 6;
+    // this.scores[5][2].value = 7;
+    // this.scores[6][2].value = 0;
+    // this.scores[7][2].value = 9;
+    // this.scores[8][2].value = 11;
+    // this.scores[9][2].value = 0;
 
     this.show = function() {
         for (var i = 0; i < 12; i++) {

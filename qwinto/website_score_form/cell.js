@@ -37,6 +37,57 @@ function Cell(x, y, color) {
             cellClickedI = this.x;
             cellClickedJ = this.y;
             console.log("Clicked on cell (", this.x,",",this.y, ") with value", this.value);
+
+            var numbers_not_possible = [];
+            var current_cell = scoreform.scores[this.x][this.y];
+            console.log(current_cell);
+            var current_col = current_cell.x;
+            var current_row = current_cell.y;
+            var rows = [0, 1, 2];
+            rows.splice(current_cell.y, 1);
+            for (var i in rows) {
+                var other_cell  = scoreform.scores[current_col][rows[i]];
+                if (other_cell.value != 0) {
+                    numbers_not_possible.push(other_cell.value);
+                }
+            }
+
+            var higher_than = 0;
+            for (var col = current_col - 1; col >= 0; col--) {
+                var other_cell = scoreform.scores[col][current_row];
+                if (other_cell.value != 0) {
+                    higher_than = other_cell.value;
+                    break;
+                }
+            }
+
+            var lower_than = 19;
+            for (var col = current_col + 1; col < 12; col++) {
+                var other_cell = scoreform.scores[col][current_row];
+                if (other_cell.value != 0) {
+                    lower_than = other_cell.value;
+                    break;
+                }
+            }
+
+            console.log(buttons[0]);
+
+            console.log('numbers_not_possible:', numbers_not_possible);
+            console.log('higher than:', higher_than);
+            console.log('lower than:', lower_than);
+
+            for (i = 0; i < buttons.length; i++) {
+                var current_button = buttons[i];
+                if (current_button.value <= higher_than ||
+                    current_button.value >= lower_than ||
+                    numbers_not_possible.includes(current_button.value)) {
+                        current_button.hidden = true;
+                    } else  {
+                        current_button.hidden = false;
+                    }
+                // console.log(buttons);
+            }
+
             showInputButtons();
             inputFormShown = true;
             console.log("inputFormShown set to",inputFormShown);
