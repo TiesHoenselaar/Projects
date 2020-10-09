@@ -4,6 +4,7 @@ let dice_value = 5;
 let dices  = [];
 
 function preload() {
+    // https://dice.virtuworld.net/?nr=3
     img = loadImage('img/waterpas.jpg');
     for (let i = 0; i < 6; i++) {
         dices[i] = loadImage('img/dice_' + (i+1) + '.jpg');
@@ -18,7 +19,7 @@ function setup() {
     image(img, width/2, 20, 750, 70);
     // img.resize(568,278);
     input = createInput('', 'number');
-    input.size(200, 100)
+    input.size(200, 100);
     input.position(width/2-100, 300);
     // input.center();
 
