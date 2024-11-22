@@ -5,5 +5,6 @@
 * [Chess](https://tieshoenselaar.github.io/Projects/chess/index.html)
 * [Exactemento](https://tieshoenselaar.github.io/Projects/exactemento/index.html)
 * [Sudoku Solver](https://tieshoenselaar.github.io/Projects/sudokuSolver/index.html)
+* [Too Good To Let Go](https://tieshoenselaar.github.io/Projects/ToGoodToLetGo/index.html)
 * [Towers Of Hanoi](https://tieshoenselaar.github.io/Projects/towersOfHanoi/index.html)
 * [Word Search](https://tieshoenselaar.github.io/Projects/wordSearch/index.html)
